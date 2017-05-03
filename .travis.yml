@@ -9,5 +9,11 @@ install:
   - pip install lxml
   - pip install selenium==2.53.0
 
+env:
+  - TESTFILE=./testing_one.py
+  - TESTFILE=./testing_two.py
+  - TESTFILE=./testing_three.py
+  - TESTFILE=./testing_four.py
+
 script:
-    - python ./testing.py
+    - python $TESTFILE
