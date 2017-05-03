@@ -14,6 +14,7 @@ env:
   - TESTFILE=./testing_two.py
   - TESTFILE=./testing_three.py
   - TESTFILE=./testing_four.py
+  - TESTFILE=./testing_five.py
 
 script:
     - python $TESTFILE
