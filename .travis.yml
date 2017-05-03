@@ -7,7 +7,7 @@ python:
 install:
   - pip install pexpect
   - pip install lxml
-  - pip install selenium=2.53.0
+  - pip install selenium==2.53.0
 
 script:
     - ./testing.py
