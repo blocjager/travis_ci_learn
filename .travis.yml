@@ -5,9 +5,9 @@ python:
 
 
 install:
-  - pip install --user pexpect
-  - pip install --user lxml
-  - pip install --user selenium==2.53.0
+  - pip install pexpect
+  - pip install lxml
+  - pip install selenium==2.53.0
 
 script:
-    - ./testing.py
+    - python ./testing.py
