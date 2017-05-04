@@ -1,21 +1,27 @@
 language: python
 
-python:
-  - 2.7
-
+matrix:
+  include:
+    - os: linux
+      env: INSTALL=yes TESTFILE=./testing_one.py
+      python: 2.7
+    - os: linux
+      env: INSTALL=yes TESTFILE=./testing_two.py
+      python: 2.7
+    - os: linux
+      env: INSTALL=yes TESTFILE=./testing_three.py
+      python: 2.7
+    - os: linux
+      env: INSTALL=no TESTFILE=./testing_six.py
+      python: 2.7
 
 install:
-  - pip install pexpect
-  - pip install lxml
-  - pip install selenium==2.53.0
+    - if [ ${INSTALL} = "yes" ]; then
+        pip install pexpect ;
+        pip install requests ;
+        pip install lxml ;
+        pip install selenium==2.53.0 ;
+      fi
 
-env:
-  - TESTFILE=./testing_one.py
-  - TESTFILE=./testing_two.py
-  - TESTFILE=./testing_three.py
-  - TESTFILE=./testing_four.py
-  - TESTFILE=./testing_five.py
-  - TESTFILE=./testing_six.py
-  
 script:
     - python $TESTFILE
