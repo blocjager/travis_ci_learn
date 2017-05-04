@@ -16,7 +16,7 @@ matrix:
       python: 2.7
 
 install:
-  - if [[ "$INSTALL" == "yes"]]; then
+  - if [ ${INSTALL} == "yes"]; then
     pip install pexpect ;
     pip install lxml ;
     pip install selenium==2.53.0 ;
