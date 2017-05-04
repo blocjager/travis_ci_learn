@@ -16,5 +16,5 @@ matrix:
       python: 2.7
 
 script:
-    - if [ ${INSTALL} == "yes"]; then pip install pexpect ; fi
+    - if [ ${INSTALL} = "yes" ]; then pip install pexpect ; fi
     - python $TESTFILE
