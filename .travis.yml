@@ -15,6 +15,8 @@ matrix:
       env: INSTALL=no TESTFILE=./testing_six.py
       python: 2.7
 
-script:
+install:
     - if [ ${INSTALL} = "yes" ]; then pip install pexpect ; fi
+
+script:
     - python $TESTFILE
