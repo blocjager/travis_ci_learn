@@ -30,7 +30,6 @@ install:
       fi
 
 script:
-    - python $TESTFILE
     - if [ ${TRAVIS_BRANCH} = "release" ]; then
         python $TESTFILE ;
       else
