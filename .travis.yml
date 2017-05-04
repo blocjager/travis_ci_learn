@@ -15,13 +15,8 @@ matrix:
       env: INSTALL=no TESTFILE=./testing_six.py
       python: 2.7
 
-install:
-  - if [ ${INSTALL} == "yes"]; then
-    pip install pexpect ;
-    pip install lxml ;
-    pip install selenium==2.53.0 ;
-    fi
-
+  -
 
 script:
+    - if [ ${INSTALL} == "yes"]; then pip install pexpect ; fi
     - python $TESTFILE
