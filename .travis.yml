@@ -3,16 +3,22 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=yes TESTFILE=./testing_one.py
+      env: INSTALL=yes TESTFILE=./testing_one.py RELEASE=no
       python: 2.7
     - os: linux
-      env: INSTALL=yes TESTFILE=./testing_two.py
+      env: INSTALL=yes TESTFILE=./testing_two.py RELEASE=no
       python: 2.7
     - os: linux
-      env: INSTALL=yes TESTFILE=./testing_three.py
+      env: INSTALL=yes TESTFILE=./testing_three.py RELEASE=no
       python: 2.7
     - os: linux
-      env: INSTALL=no TESTFILE=./testing_six.py
+      env: INSTALL=yes TESTFILE=./testing_four.py RELEASE=yes
+      python: 2.7
+    - os: linux
+      env: INSTALL=yes TESTFILE=./testing_five.py RELEASE=yes
+      python: 2.7
+    - os: linux
+      env: INSTALL=no TESTFILE=./testing_six.py RELEASE=no
       python: 2.7
 
 install:
@@ -24,4 +30,14 @@ install:
       fi
 
 script:
-    - python $TESTFILE
+    - export BRANCH=$(if [ ${TRAVIS_PULL_REQUEST} = "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+    - echo "The branch being built is - $BRANCH"
+    - if [ ${BRANCH} = "release" ] ; then
+        python $TESTFILE ;
+      else
+        if [ ${BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
+          python $TESTFILE ;
+        else
+          echo $TESTFILE "will not run as this is not a release branch" ;
+        fi
+      fi
