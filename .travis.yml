@@ -10,9 +10,9 @@ matrix:
       python: 2.7
 
 install:
-  - if [[ "$INSTALL" == "true"]]; then pip install pexpect; fi
-  - if [[ "$INSTALL" == "true"]]; then pip install lxml; fi
-  - if [[ "$INSTALL" == "true"]]; then pip install selenium=2.53.0; fi
+  - if [[ "$INSTALL" == "true"]]; then pip install pexpect ; fi
+  - if [[ "$INSTALL" == "true"]]; then pip install lxml ; fi
+  - if [[ "$INSTALL" == "true"]]; then pip install selenium==2.53.0 ; fi
 
 env:
   - TESTFILE=./testing_one.py
@@ -23,5 +23,5 @@ env:
   - TESTCASE=./testing_six.py
   
 script:
-    - if [[ "$INSTALL" == "true"]]; then python $TESTFILE; fi
-    - if [[ "$INSTALL" == "false"]]; then python $TESTCASE; fi
+    - if [[ "$INSTALL" == "true"]]; then python $TESTFILE ; fi
+    - if [[ "$INSTALL" == "false"]]; then python $TESTCASE ; fi
