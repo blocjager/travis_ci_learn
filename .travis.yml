@@ -25,5 +25,8 @@ env:
   - TESTCASE=./testing_six.py
   
 script:
-    - if [ "$INSTALL" = "true"]; then python $TESTFILE ; fi
-    - if [ "$INSTALL" = "false"]; then python $TESTCASE ; fi
+    - if [ ${INSTALL} = "true"]; then
+      python $TESTFILE ;
+      else
+      python $TESTCASE ;
+      fi
