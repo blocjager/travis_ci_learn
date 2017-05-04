@@ -31,11 +31,11 @@ install:
 
 script:
     - export BRANCH=$(if [ ${TRAVIS_PULL_REQUEST} = "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-    - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
-    - if [ ${TRAVIS_BRANCH} = "release" ] ; then
+    - echo "The branch being built is - $BRANCH"
+    - if [ ${BRANCH} = "release" ] ; then
         python $TESTFILE ;
       else
-        if [ ${TRAVIS_BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
+        if [ ${BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
           python $TESTFILE ;
         else
           echo $TESTFILE "will not run as this is not a release branch" ;
