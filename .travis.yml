@@ -1,13 +1,20 @@
 language: python
 
+matrix:
+  include:
+    - os: linux
+      env: INSTALL=true
+    - os: linux
+      env: INSTALL=false
+
 python:
   - 2.7
 
 
 install:
-  - pip install pexpect
-  - pip install lxml
-  - pip install selenium==2.53.0
+  - if [[ "$INSTALL" == true]]; then pip install pexpect; fi
+  - if [[ "$INSTALL" == true]]; then pip install lxml; fi
+  - if [[ "$INSTALL" == true]]; then pip install selenium=2.53.0; fi
 
 env:
   - TESTFILE=./testing_one.py
@@ -15,7 +22,8 @@ env:
   - TESTFILE=./testing_three.py
   - TESTFILE=./testing_four.py
   - TESTFILE=./testing_five.py
-  - TESTFILE=./testing_six.py
+  - TESTCASE=./testing_six.py
   
 script:
-    - python $TESTFILE
+    - if [[ "$INSTALL" == true]]; then python $TESTFILE; fi
+    - if [[ "$INSTALL" == false]]; then python $TESTCASE; fi
