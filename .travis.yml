@@ -25,7 +25,6 @@ install:
     - if [ ${INSTALL} = "yes" ]; then
         pip install pexpect ;
         pip install requests ;
-        pip install lxml ;
         pip install selenium==2.53.0 ;
       fi
 
