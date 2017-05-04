@@ -3,10 +3,16 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=true
+      env: INSTALL=true TESTFILE=./testing_one.py
       python: 2.7
     - os: linux
-      env: INSTALL=false
+      env: INSTALL=true TESTFILE=./testing_two.py
+      python: 2.7
+    - os: linux
+      env: INSTALL=true TESTFILE=./testing_three.py
+      python: 2.7
+    - os: linux
+      env: INSTALL=false TESTFILE=./testing_six.py
       python: 2.7
 
 install:
@@ -16,17 +22,6 @@ install:
     pip install selenium==2.53.0 ;
     fi
 
-env:
-  - TESTFILE=./testing_one.py
-  - TESTFILE=./testing_two.py
-  - TESTFILE=./testing_three.py
-  - TESTFILE=./testing_four.py
-  - TESTFILE=./testing_five.py
-  - TESTCASE=./testing_six.py
-  
+
 script:
-    - if [ ${INSTALL} = "true"]; then
-      python $TESTFILE ;
-      else
-      python $TESTCASE ;
-      fi
+    - python $TESTFILE
