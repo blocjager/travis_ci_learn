@@ -3,20 +3,20 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=true TESTFILE=./testing_one.py
+      env: INSTALL=yes TESTFILE=./testing_one.py
       python: 2.7
     - os: linux
-      env: INSTALL=true TESTFILE=./testing_two.py
+      env: INSTALL=yes TESTFILE=./testing_two.py
       python: 2.7
     - os: linux
-      env: INSTALL=true TESTFILE=./testing_three.py
+      env: INSTALL=yes TESTFILE=./testing_three.py
       python: 2.7
     - os: linux
-      env: INSTALL=false TESTFILE=./testing_six.py
+      env: INSTALL=no TESTFILE=./testing_six.py
       python: 2.7
 
 install:
-  - if [ ${INSTALL} = "true"]; then
+  - if [[ "$INSTALL" == "yes"]]; then
     pip install pexpect ;
     pip install lxml ;
     pip install selenium==2.53.0 ;
