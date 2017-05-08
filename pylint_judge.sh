@@ -1,4 +1,3 @@
-#!/bin/bash
 # set -v
 ls -l
 if [ "${PYLINT}" = "yes" ] ; then
