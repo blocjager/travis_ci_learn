@@ -43,25 +43,25 @@ script:
         status="pass";
         while read line
         do 
-            line_status="pass";
-            num1=$(grep -oP "at \K[0-9\.\-]*" <<< $line); 
-            num2="5";
-            if (( $(echo "$num1 < $num2" | bc -l) )); then
-                status="fail";
-                line_status="fail";
-            fi
-            
-            num3=$(grep -oP "previous run.*/10, \K[0-9\.\-+]*" <<< $line | tr -d "+");
-            num4="0";
-            if (( $(echo "$num3 < $num4" | bc -l) )); then
-                status="fail";
-                line_status="fail";
-            fi
+          line_status="pass";
+          num1=$(grep -oP "at \K[0-9\.\-]*" <<< $line); 
+          num2="5";
+          if (( $(echo "$num1 < $num2" | bc -l) )); then
+              status="fail";
+              line_status="fail";
+          fi
+          
+          num3=$(grep -oP "previous run.*/10, \K[0-9\.\-+]*" <<< $line | tr -d "+");
+          num4="0";
+          if (( $(echo "$num3 < $num4" | bc -l) )); then
+              status="fail";
+              line_status="fail";
+          fi
 
-            if [ "$line_status" = "fail" ]; then
-                filename=$(grep -oP "[^\s]{2,}" <<< $line | head -1);
-                echo "$filename ($num1, $num3)";
-            fi
+          if [ "$line_status" = "fail" ]; then
+              filename=$(grep -oP "[^\s]{2,}" <<< $line | head -1);
+              echo "$filename ($num1, $num3)";
+          fi
         done < summary.txt
 
         if [ "$status" = "fail" ]; then
