@@ -70,5 +70,6 @@ script:
         else
           exit 0;
         fi
+        ls -l
       fi
     - ls -l
