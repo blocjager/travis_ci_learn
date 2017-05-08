@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ev
 if [ "${PYLINT}" = "yes" ] ; then
     git --no-pager diff --name-only origin/master "${BRANCH}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true ;
     git checkout "${BRANCH}" ;
