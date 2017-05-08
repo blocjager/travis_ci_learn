@@ -42,7 +42,7 @@ script:
         set +x;
         echo "Files that doesn't meet the pylint score requirement (>5 with score increase)";
         status="pass";
-        while read -r line
+        while read -r line;
         do 
           line_status="pass";
           num1=$(grep -oP "at \K[0-9\.\-]*" <<< "$line"); 
