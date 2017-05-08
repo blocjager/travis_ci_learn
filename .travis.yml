@@ -28,4 +28,4 @@ script:
       fi
     - pip install pylint;
     - sudo apt-get install bc;
-    - ./pylint_judge.sh
+    - ./Tools/pylint_judge.sh
