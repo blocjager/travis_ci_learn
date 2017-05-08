@@ -38,7 +38,7 @@ script:
         sed -i -e 's/Your code//g' score.txt
         paste -d "^" filename.txt score.txt | column -t -s "^" | tee summary.txt
 
-        set +x
+        set +x;
         echo "Files that doesn't meet the pylint score requirement (>5 with score increase)";
         status="pass";
         while read line
