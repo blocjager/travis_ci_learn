@@ -46,14 +46,14 @@ script:
           line_status="pass";
           num1=$(grep -oP "at \K[0-9\.\-]*" <<< $line); 
           num2="5";
-          if [ (( $(echo "$num1 < $num2" | bc -l) )) ] ; then
+          if [ $(echo "$num1 < $num2" | bc -l) ] ; then
               status="fail";
               line_status="fail";
           fi
           
           num3=$(grep -oP "previous run.*/10, \K[0-9\.\-+]*" <<< $line | tr -d "+");
           num4="0";
-          if [ (( $(echo "$num3 < $num4" | bc -l) )) ] ; then
+          if [ $(echo "$num3 < $num4" | bc -l) ] ; then
               status="fail";
               line_status="fail";
           fi
