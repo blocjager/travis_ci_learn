@@ -27,4 +27,5 @@ script:
         fi
       fi
     - pip install pylint;
+    - sudo apt-get install bc;
     - ./pylint_judge.sh
