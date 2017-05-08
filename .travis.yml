@@ -26,10 +26,11 @@ script:
           echo $TESTFILE "will not run as this is not a release branch" ;
         fi
       fi
-    - if [ ${PYLINT} = "yes" ] ; then
-        git --no-pager diff --name-only origin/master ${BRANCH}  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true
-        git checkout ${BRANCH}
-        git --no-pager diff --name-only ${BRANCH} origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true
+    - #!bin/bash
+      if [ "${PYLINT}" = "yes" ] ; then
+        git --no-pager diff --name-only origin/master "${BRANCH}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true
+        git checkout "${BRANCH}"
+        git --no-pager diff --name-only "${BRANCH}" origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true
 
         grep "Your code has been rated" pylint_result.txt > score.txt
         grep "Module" pylint_result.txt > filename.txt
@@ -41,25 +42,25 @@ script:
         set +x;
         echo "Files that doesn't meet the pylint score requirement (>5 with score increase)";
         status="pass";
-        while read line
+        while read -r line
         do 
           line_status="pass";
-          num1=$(grep -oP "at \K[0-9\.\-]*" <<< $line); 
+          num1=$(grep -oP "at \K[0-9\.\-]*" <<< "$line"); 
           num2="5";
-          if [ $(echo "$num1 < $num2" | bc -l) ] ; then
+          if [ "$(echo "$num1 < $num2" | bc -l)" ] ; then
               status="fail";
               line_status="fail";
           fi
           
-          num3=$(grep -oP "previous run.*/10, \K[0-9\.\-+]*" <<< $line | tr -d "+");
+          num3=$(grep -oP "previous run.*/10, \K[0-9\.\-+]*" <<< "$line" | tr -d "+");
           num4="0";
-          if [ $(echo "$num3 < $num4" | bc -l) ] ; then
+          if [ "$(echo "$num3 < $num4" | bc -l)" ] ; then
               status="fail";
               line_status="fail";
           fi
 
           if [ "$line_status" = "fail" ]; then
-              filename=$(grep -oP "[^\s]{2,}" <<< $line | head -1);
+              filename=$(grep -oP "[^\s]{2,}" <<< "$line" | head -1);
               echo "$filename ($num1, $num3)";
           fi
         done < summary.txt
