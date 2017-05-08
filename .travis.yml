@@ -3,7 +3,7 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=yes TESTFILE=./testing_one.py RELEASE=no PYLINT=yes
+      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no PYLINT=yes
       python: 2.7
 
 install:
@@ -38,7 +38,6 @@ script:
         sed -i -e 's/Your code//g' score.txt
         paste -d "^" filename.txt score.txt | column -t -s "^" | tee summary.txt
 
-
         set +x
         echo "Files that doesn't meet the pylint score requirement (>5 with score increase)";
         status="pass";
@@ -59,12 +58,10 @@ script:
                 line_status="fail";
             fi
 
-            if [ "$line_status" = "fail" ];
-            then
+            if [ "$line_status" = "fail" ]; then
                 filename=$(grep -oP "[^\s]{2,}" <<< $line | head -1);
                 echo "$filename ($num1, $num3)";
             fi
-
         done < summary.txt
 
         if [ "$status" = "fail" ]; then
