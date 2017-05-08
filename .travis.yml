@@ -28,16 +28,16 @@ script:
       fi
     - #!bin/bash
       if [ "${PYLINT}" = "yes" ] ; then
-        git --no-pager diff --name-only origin/master "${BRANCH}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true
-        git checkout "${BRANCH}"
-        git --no-pager diff --name-only "${BRANCH}" origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true
+        git --no-pager diff --name-only origin/master "${BRANCH}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true ;
+        git checkout "${BRANCH}" ;
+        git --no-pager diff --name-only "${BRANCH}" origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true ;
 
-        grep "Your code has been rated" pylint_result.txt > score.txt
-        grep "Module" pylint_result.txt > filename.txt
+        grep "Your code has been rated" pylint_result.txt > score.txt ;
+        grep "Module" pylint_result.txt > filename.txt ;
 
-        sed -i -e 's/\** Module//g' filename.txt
-        sed -i -e 's/Your code//g' score.txt
-        paste -d "^" filename.txt score.txt | column -t -s "^" | tee summary.txt
+        sed -i -e 's/\** Module//g' filename.txt ;
+        sed -i -e 's/Your code//g' score.txt ;
+        paste -d "^" filename.txt score.txt | column -t -s "^" | tee summary.txt ;
 
         set +x;
         echo "Files that doesn't meet the pylint score requirement (>5 with score increase)";
@@ -63,13 +63,13 @@ script:
               filename=$(grep -oP "[^\s]{2,}" <<< "$line" | head -1);
               echo "$filename ($num1, $num3)";
           fi
-        done < summary.txt
+        done < summary.txt;
 
         if [ "$status" = "fail" ] ; then
           exit 1;
         else
           exit 0;
         fi
-        ls -l
+        ls -l;
       fi
     - ls -l
