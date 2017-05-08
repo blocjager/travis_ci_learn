@@ -1,9 +1,9 @@
 #!/bin/bash
 set -ev
 if [ "${PYLINT}" = "yes" ] ; then
-    git --no-pager diff --name-only origin/master "${BRANCH}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true ;
-    git checkout "${BRANCH}" ;
-    git --no-pager diff --name-only "${BRANCH}" origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true ;
+    git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true ;
+    git checkout "${TRAVIS_COMMIT}" ;
+    git --no-pager diff --name-only "${TRAVIS_COMMIT}" origin/master  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint | tee pylint_result.txt || true ;
 
     grep "Your code has been rated" pylint_result.txt > score.txt ;
     grep "Module" pylint_result.txt > filename.txt ;
