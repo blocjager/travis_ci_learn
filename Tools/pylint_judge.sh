@@ -1,5 +1,5 @@
 # set -v
-ls -l
+# ls -l
 if [ "${PYLINT}" = "yes" ] ; then
     git checkout origin/master
     git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$'
