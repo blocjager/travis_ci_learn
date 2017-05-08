@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+set -v
 if [ "${PYLINT}" = "yes" ] ; then
     git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$'
     git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$' | xargs -L 1 pylint || true ;
