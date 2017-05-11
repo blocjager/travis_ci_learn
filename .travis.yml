@@ -29,6 +29,8 @@ install:
       fi
 
 script:
+    - git clone https://github.com/blocjager/python_bank.git
+    - ls
     - export BRANCH=$(if [ ${TRAVIS_PULL_REQUEST} = "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
     - echo "The branch being built is - $BRANCH"
     - if [ ${BRANCH} = "release" ] ; then
