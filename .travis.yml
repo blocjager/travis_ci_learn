@@ -44,8 +44,6 @@ script:
 notifications:
   email:
     recipients:
-      - sanika2512@gmail.com
       - nikkoolrocks@gmail.com
-      - sanika.kulkarni@mavs.uta.com
     on_success: change
     on_failure: always
