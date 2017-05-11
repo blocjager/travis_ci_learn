@@ -31,7 +31,7 @@ install:
 script:
     - export BRANCH=$(if [ ${TRAVIS_PULL_REQUEST} = "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
     - echo "The branch being built is - $BRANCH"
-    - if [ ${BRANCH} = "release" ] ; then
+    - if [ ${FAKE_BRANCH} = "release" ] ; then
           python $TESTFILE ;
       else
           if [ ${BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
