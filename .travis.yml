@@ -38,6 +38,7 @@ script:
             echo $TESTFILE "will not run as this is not a release branch"
           fi
         fi
+        
 
 notifications:
   email:
