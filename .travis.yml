@@ -29,14 +29,24 @@ install:
       fi
 
 script:
+    - git clone https://github.com/blocjager/python_bank.git
+    - ls
     - export BRANCH=$(if [ ${TRAVIS_PULL_REQUEST} = "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
     - echo "The branch being built is - $BRANCH"
     - if [ ${BRANCH} = "release" ] ; then
-        python $TESTFILE ;
-      else
-        if [ ${BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
           python $TESTFILE ;
-        else
-          echo $TESTFILE "will not run as this is not a release branch" ;
-        fi
+      else
+          if [ ${BRANCH} != "release"  -a  ${RELEASE} = "no" ] ; then
+              python $TESTFILE ;
+          else
+              echo $TESTFILE "will not run as this is not a release branch" ;
+          fi
       fi
+
+
+notifications:
+  email:
+    recipients:
+      - nikkoolrocks@gmail.com
+    on_success: always
+    on_failure: always
