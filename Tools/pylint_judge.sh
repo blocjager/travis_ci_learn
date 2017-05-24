@@ -3,7 +3,7 @@
 if [ "${PYLINT}" = "yes" ] ; then
     git checkout origin/master
     git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$'
-    if [[ $(git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$') ]]; then
+    if [[ $(git --no-pager diff --name-only "${TRAVIS_COMMIT}" "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$') ]]; then
         echo "continue"
     else
         echo "no file"
