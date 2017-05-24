@@ -28,7 +28,4 @@ script:
       fi
     - pip install pylint;
     - sudo apt-get install bc;
-    - if ! [[ ${PYLINT} = "yes" ]] ; then
-        echo "WHAT?";
-        ./Tools/pylint_judge.sh;
-      fi
+    - ./Tools/pylint_judge.sh;
