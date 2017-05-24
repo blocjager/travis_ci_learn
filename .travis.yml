@@ -3,7 +3,7 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no
+      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no PYLINT=yes
       python: 2.7
 
 install:
