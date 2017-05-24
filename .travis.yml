@@ -29,5 +29,5 @@ script:
     - pip install pylint;
     - sudo apt-get install bc;
     - if ! [ ${PYLINT} ]; then
-        ./Tools/pylint_judge.sh
+        ./Tools/pylint_judge.sh;
       fi
