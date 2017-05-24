@@ -3,7 +3,7 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no PYLINT=yes
+      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no
       python: 2.7
 
 install:
@@ -28,4 +28,6 @@ script:
       fi
     - pip install pylint;
     - sudo apt-get install bc;
-    - ./Tools/pylint_judge.sh
+    - if ~ [ ${PYLINT} ]; then
+        ./Tools/pylint_judge.sh
+      fi

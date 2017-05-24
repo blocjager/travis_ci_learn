@@ -2,7 +2,7 @@
 # ls -l
 if [ "${PYLINT}" = "yes" ] ; then
     git checkout origin/master
-    if [[ $(git --no-pager diff --name-only origin/master origin/master | grep -v 'OSS' | grep '.py$') ]]; then
+    if [[ $(git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$') ]]; then
         echo "List of .py files that have changed in this commit"
         git --no-pager diff --name-only origin/master "${TRAVIS_COMMIT}"  | grep -v 'OSS' | grep '.py$'
     else
