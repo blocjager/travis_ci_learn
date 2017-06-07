@@ -3,22 +3,7 @@ language: python
 matrix:
   include:
     - os: linux
-      env: INSTALL=yes TESTFILE=./testing_one.py RELEASE=no
-      python: 2.7
-    - os: linux
-      env: INSTALL=yes TESTFILE=./testing_two.py RELEASE=no
-      python: 2.7
-    - os: linux
-      env: INSTALL=yes TESTFILE=./testing_three.py RELEASE=no
-      python: 2.7
-    - os: linux
-      env: INSTALL=yes TESTFILE=./testing_four.py RELEASE=yes
-      python: 2.7
-    - os: linux
-      env: INSTALL=yes TESTFILE=./testing_five.py RELEASE=yes
-      python: 2.7
-    - os: linux
-      env: INSTALL=no TESTFILE=./testing_six.py RELEASE=no
+      env: INSTALL=no TESTFILE=./testing_one.py RELEASE=no PYLINT=yes
       python: 2.7
 
 install:
@@ -41,3 +26,6 @@ script:
           echo $TESTFILE "will not run as this is not a release branch" ;
         fi
       fi
+    - pip install pylint;
+    - sudo apt-get install bc;
+    - ./Tools/pylint_judge.sh;
